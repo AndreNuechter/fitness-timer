@@ -5,6 +5,10 @@
     "main": "main.js",
     "author": "AndreNuechter",
     "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https: //github.com/AndreNuechter/fitness-timer"
+    },
     "devDependencies": {
         "eslint": "^5.16.0",
         "eslint-config-airbnb-base": "^13.2.0",

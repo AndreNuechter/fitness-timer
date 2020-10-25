@@ -1,8 +1,5 @@
-// TODO setup github repo, add repo to package.json, add page-link to README
-
 import './js-modules/wakelock.js';
-// TODO uncomment
-// import './service-worker-init.js';
+import './js-modules/service-worker-init.js';
 import playSound, { frequencies } from './js-modules/audio.js';
 import {
     app,
