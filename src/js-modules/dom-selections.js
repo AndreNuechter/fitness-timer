@@ -1,0 +1,9 @@
+export const app = document.getElementById('app');
+export const setDisplay = document.getElementById('set-display');
+export const mainDisplay = document.getElementById('main-display');
+export const mainLabel = mainDisplay.previousElementSibling;
+export const subDisplay = document.getElementById('sub-display');
+export const subLabel = subDisplay.previousElementSibling;
+export const playButton = document.getElementById('state-toggle');
+export const resetButton = document.getElementById('reset-button');
+export const durationVisualization = document.getElementById('duration-visualization').lastElementChild;

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Fitness Timer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple fitness timer pwa">
+    <meta name="theme-color" content="#F5F5F5">
+    <link rel="icon" type="image/png" href="./images/icons-192.png">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="manifest" href="./manifest.json">
+    <script type="module" src="./main.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <svg id="duration-visualization" viewBox="0 0 100 100">
+            <path d="M5 95A7 8 0 0 1 95 95" />
+            <path d="M5 95A7 8 0 0 1 95 95" />
+        </svg>
+        <label class="duration-display">
+            <span class="label-text phase-label">Hussle</span>
+            <input id="main-display" inputmode="numeric">
+        </label>
+        <label class="duration-display">
+            <span class="label-text phase-label">Chill</span>
+            <input id="sub-display" inputmode="numeric">
+        </label>
+        <label>
+            <input id="set-display" inputmode="numeric">
+            <span class="label-text">times</span>
+        </label>
+        <button>
+            <svg id="state-toggle" class="button-icon">
+                <use href="#play" />
+            </svg>
+        </button>
+        <button id="reset-button" class="hidden">
+            <svg class="button-icon">
+                <use href="#stop" />
+            </svg>
+        </button>
+    </div>
+    <svg id="defs">
+        <defs>
+            <symbol id="play" viewBox="0 0 100 100">
+                <polygon points="0 0 100 50 0 100" />
+            </symbol>
+            <symbol id="pause" viewBox="0 0 100 100">
+                <rect x="0" y="0" width="40" height="100" />
+                <rect x="60" y="0" width="40" height="100" />
+            </symbol>
+            <symbol id="stop" viewBox="0 0 100 100">
+                <rect x="0" y="0" width="100" height="100" />
+            </symbol>
+            <linearGradient id="button-sheen" gradientTransform="rotate(40)">
+                <stop offset="5%" stop-color="#F5F5F5" />
+                <stop offset="95%" stop-color="#C0C0C0" />
+            </linearGradient>
+        </defs>
+    </svg>
+</body>
+
+</html>

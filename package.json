@@ -1,0 +1,24 @@
+{
+    "name": "fitness-timer",
+    "version": "1.0.0",
+    "description": "A simple fitness timer pwa",
+    "main": "main.js",
+    "author": "AndreNuechter",
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^5.16.0",
+        "eslint-config-airbnb-base": "^13.2.0",
+        "eslint-plugin-import": "^2.20.2",
+        "express": "^4.17.1",
+        "gulp": "^4.0.2",
+        "gulp-csso": "^3.0.1",
+        "gulp-htmlmin": "^5.0.1",
+        "webpack-stream": "^5.2.1"
+    },
+    "scripts": {
+        "dev": "gulp",
+        "prelive": "gulp prelive",
+        "build": "gulp bundle",
+        "deploy": "gulp bundle && git add . && git commit -m \"Build\" && git push --all"
+    }
+}
