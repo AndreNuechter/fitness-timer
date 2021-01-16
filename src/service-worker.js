@@ -6,7 +6,7 @@ self.addEventListener('fetch', (event) => {
                 let response = await self.caches.match(event.request);
                 if (response) return response;
                 response = await fetch(event.request);
-                const cache = await self.caches.open('v1');
+                const cache = await self.caches.open('v2');
                 cache.put(event.request, response.clone());
                 return response;
             })()

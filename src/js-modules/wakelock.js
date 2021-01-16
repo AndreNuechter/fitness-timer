@@ -1,5 +1,5 @@
 export default (async () => {
-    if (!('WakeLock' in window && 'request' in window.WakeLock)) return;
+    if (!('wakeLock' in navigator && 'request' in navigator.wakeLock)) return;
 
     const getWakeLock = () => navigator.wakeLock.request('screen');
     await getWakeLock();

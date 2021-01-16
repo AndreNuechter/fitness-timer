@@ -5,6 +5,9 @@ const {
 } = require('gulp');
 const minifyCSS = require('gulp-csso');
 const htmlmin = require('gulp-htmlmin');
+const fs = require('fs');
+const http = require('http');
+const https = require('https');
 const express = require('express');
 const webpack = require('webpack-stream');
 const webpackConfig = require('./webpack.config.js');
@@ -41,7 +44,15 @@ function pwaAssets() {
 }
 
 function serve(dir) {
+    const key = fs.readFileSync('ssl/privatekey.key', 'utf8');
+    const cert = fs.readFileSync('ssl/certificate.crt', 'utf8');
     const app = express();
+
     app.use(express.static(dir));
-    app.listen(3000);
+
+    const httpServer = http.createServer(app);
+    const httpsServer = https.createServer({ key, cert }, app);
+
+    httpServer.listen(3000);
+    httpsServer.listen(8443);
 }

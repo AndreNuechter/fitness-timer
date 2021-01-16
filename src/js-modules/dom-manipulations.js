@@ -23,8 +23,8 @@ export function setSubLabel(text) {
     setTextContent(subLabel, text);
 }
 
-export function setBtnIconId(text) {
-    playButton.firstElementChild.setAttribute('href', `#${text}`);
+export function setBtnIconId(id) {
+    playButton.firstElementChild.setAttribute('href', `#${id}`);
 }
 
 export function setSetDisplay(text) {
@@ -35,6 +35,6 @@ function setTextContent(element, text) {
     element.textContent = text;
 }
 
-export function setValue(element, text) {
-    element.value = text;
+export function setValue(element, value) {
+    element.value = value;
 }
