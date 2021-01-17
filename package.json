@@ -23,6 +23,6 @@
         "dev": "gulp",
         "prelive": "gulp prelive",
         "build": "gulp bundle",
-        "deploy": "gulp bundle && git add . && git commit -m \"Build\" && git push --all"
+        "deploy": "gulp bundle && git add . && git commit --amend && git push --all"
     }
 }
