@@ -1,18 +1,19 @@
 /* eslint-disable no-restricted-globals */
 
 const appName = 'fitness-timer';
-const appVersion = '3';
+const appVersion = '3.1';
 const cacheName = `${appName}-v${appVersion}`;
 
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         (async () => {
             const keys = await self.caches.keys();
-            keys.forEach((key) => {
+            return Promise.all(keys.map((key) => {
                 if (key.includes(appName) && key !== cacheName) {
-                    self.caches.delete(key);
+                    return self.caches.delete(key);
                 }
-            });
+                return true;
+            }));
         })()
     );
 });
