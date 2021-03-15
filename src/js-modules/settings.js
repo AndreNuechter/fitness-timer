@@ -1,13 +1,22 @@
-export default new Proxy(JSON.parse(localStorage.getItem('fitness-timer-settings')) || {
+const settings = JSON.parse(localStorage.getItem('fitness-timer-settings')) || {
     durations: [90, 15],
     numberOfSets: 6
-}, {
-    set(obj, key, val) {
-        if (key in obj) {
-            Reflect.set(obj, key, val);
-            localStorage.setItem('fitness-timer-settings', JSON.stringify(obj));
-            return true;
-        }
-        return false;
+};
+const saveSettings = () => localStorage.setItem('fitness-timer-settings', JSON.stringify(settings));
+
+export default {
+    get durations() {
+        return settings.durations;
+    },
+    setDuration(id, val) {
+        settings.durations[id] = val;
+        saveSettings();
+    },
+    get numberOfSets() {
+        return settings.numberOfSets;
+    },
+    set numberOfSets(val) {
+        settings.numberOfSets = val;
+        saveSettings();
     }
-});
+};

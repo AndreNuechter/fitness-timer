@@ -104,9 +104,7 @@ function togglePlaying() {
 function setDuration(currentRole, target) {
     const { value } = target;
     if (digitRe.test(value)) {
-        settings.durations[currentRole] = +value;
-        // NOTE reassigning to trigger proxy and thus saving to localStorage
-        settings.durations = settings.durations;
+        settings.setDuration(currentRole, +value);
         setDurationOnePercent();
         reset();
     } else setValue(target, settings.durations[currentRole]);

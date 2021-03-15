@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 
 const appName = 'fitness-timer';
-const appVersion = '3.1';
+const appVersion = '3.2';
 const cacheName = `${appName}-v${appVersion}`;
 
 self.addEventListener('activate', (event) => {
