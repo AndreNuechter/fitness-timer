@@ -111,7 +111,7 @@ function setDuration(currentRole, target) {
 }
 
 function startWorkout() {
-    playSound(frequencies.set, 500);
+    playSound(frequencies.set, undefined, 600);
     resetButton.classList.remove('hidden');
 }
 
@@ -132,7 +132,7 @@ function countDown() {
         if (!resting) remainingSets -= 1;
 
         if (!remainingSets) {
-            playSound(frequencies.finish, 500);
+            playSound(frequencies.finish, undefined, 600);
             reset();
             return;
         }
@@ -144,7 +144,12 @@ function countDown() {
         setSubDisplay(settings.durations[+!resting]);
         setMainLabel(labelTexts[+resting]);
         setSubLabel(labelTexts[+!resting]);
-    } else if (currentDuration < 10) playSound(frequencies.countdown); // TODO get louder?!
+    } else if (currentDuration < 10) {
+        playSound(
+            frequencies.countdown,
+            0.25 + (10 - currentDuration) * 0.03
+        );
+    }
 }
 
 function clearTimer() {

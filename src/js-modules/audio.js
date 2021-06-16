@@ -1,10 +1,11 @@
 const ctx = new window.AudioContext();
 const masterGainNode = ctx.createGain();
-masterGainNode.gain.value = 0.25;
 masterGainNode.connect(ctx.destination);
 
-export default (freq, duration = 200) => {
+export default (freq, volume = 0.25, duration = 200) => {
     const osc = ctx.createOscillator();
+
+    masterGainNode.gain.value = volume;
 
     osc.connect(masterGainNode);
     osc.type = 'sine';
