@@ -1,3 +1,10 @@
+// TODO more specific keyboards?
+// TODO automatically increment/change cache version
+// TODO more diverse tones for start, finish etc
+// TODO get louder on count-downs
+// TODO way to prevent screen touches (pointer-events: none for entire screen but the toggle)
+// TODO only screen-lock when a timer is running
+
 import './js-modules/wakelock.js';
 import './js-modules/service-worker-init.js';
 import playSound, { frequencies } from './js-modules/audio.js';
@@ -87,7 +94,7 @@ function reset() {
 }
 
 function setDurationOnePercent() {
-    durationsOnePercent = settings.durations.map(num => num * 0.01);
+    durationsOnePercent = settings.durations.map((num) => num * 0.01);
 }
 
 function togglePlaying() {
@@ -118,7 +125,6 @@ function startWorkout() {
 function setTimer() {
     timerInterval = setInterval(countDown, 1000);
 }
-
 
 function countDown() {
     currentDuration -= 1;

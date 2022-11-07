@@ -1,8 +1,4 @@
-/* eslint-disable no-restricted-globals */
-
-const appName = 'fitness-timer';
-const appVersion = '3.3';
-const cacheName = `${appName}-v${appVersion}`;
+const cacheName = `${process.env.appName}-v${process.env.appVersion}`;
 
 self.addEventListener('activate', (event) => {
     event.waitUntil(

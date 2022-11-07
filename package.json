@@ -2,7 +2,7 @@
     "name": "fitness-timer",
     "version": "1.0.0",
     "description": "A simple fitness timer pwa",
-    "main": "main.js",
+    "main": "src/main.js",
     "author": "AndreNuechter",
     "license": "ISC",
     "repository": {
@@ -10,19 +10,18 @@
         "url": "https: //github.com/AndreNuechter/fitness-timer"
     },
     "devDependencies": {
-        "eslint": "^5.16.0",
-        "eslint-config-airbnb-base": "^13.2.0",
-        "eslint-plugin-import": "^2.20.2",
-        "express": "^4.17.1",
-        "gulp": "^4.0.2",
-        "gulp-csso": "^3.0.1",
-        "gulp-htmlmin": "^5.0.1",
-        "webpack-stream": "^5.2.1"
+        "eslint": "^7.19.0",
+        "eslint-config-airbnb-base": "^14.2.1",
+        "eslint-plugin-import": "^2.22.1",
+        "vite": "^3.2.2",
+        "vite-plugin-minify": "^1.5.2",
+        "vite-plugin-mkcert": "^1.10.1"
     },
     "scripts": {
-        "dev": "gulp",
-        "prelive": "gulp prelive",
-        "build": "gulp bundle",
-        "deploy": "gulp bundle && git add . && git commit --amend --no-edit && git push --all"
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "lint": "eslint ./src --fix",
+        "deploy": "npm run build && git add docs/. && git commit --amend --no-edit && git push --all"
     }
 }
