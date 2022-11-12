@@ -1,5 +1,3 @@
-// TODO more specific keyboards?
-// TODO automatically increment/change cache version
 // TODO more diverse tones for start, finish etc
 // TODO get louder on count-downs
 // TODO way to prevent screen touches (pointer-events: none for entire screen but the toggle)
