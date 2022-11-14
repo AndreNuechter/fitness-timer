@@ -1,5 +1,3 @@
-// TODO more diverse tones for start, finish etc
-// TODO get louder on count-downs
 // TODO way to prevent screen touches (pointer-events: none for entire screen but the toggle)
 // TODO only screen-lock when a timer is running
 
@@ -47,18 +45,17 @@ app.addEventListener('focusin', ({ target }) => {
         target.select();
     }
 });
-setDisplay.addEventListener('change', ({ target }) => {
-    const { value } = target;
+setDisplay.addEventListener('change', ({ target: { value } }) => {
     if (digitRe.test(value)) {
         settings.numberOfSets = +value;
         reset();
     } else setSetDisplay(settings.numberOfSets);
 });
 mainDisplay.addEventListener('change', ({ target }) => {
-    setDuration(resting ? 1 : 0, target);
+    setDuration(Number(resting), target);
 });
 subDisplay.addEventListener('change', ({ target }) => {
-    setDuration(resting ? 0 : 1, target);
+    setDuration(Number(!resting), target);
 });
 playButton.addEventListener('click', togglePlaying);
 resetButton.addEventListener('click', reset);
@@ -97,7 +94,8 @@ function setDurationOnePercent() {
 
 function togglePlaying() {
     playing = !playing;
-    setBtnIconId(btnIconIds[+playing]);
+
+    setBtnIconId(btnIconIds[Number(playing)]);
 
     if (playing) {
         setTimer();
@@ -126,9 +124,14 @@ function setTimer() {
 
 function countDown() {
     currentDuration -= 1;
-    const phaseIsOver = currentDuration < 0;
+
+    const phaseIsOver = currentDuration <= 0;
+
     setMainDisplay(currentDuration);
-    setDurationVisualLength(phaseIsOver ? 100 : currentDuration / durationsOnePercent[+resting]);
+    setDurationVisualLength(phaseIsOver
+        ? 100
+        : currentDuration / durationsOnePercent[Number(resting)]
+    );
 
     if (phaseIsOver) {
         resting = !resting;
@@ -136,22 +139,23 @@ function countDown() {
         if (!resting) remainingSets -= 1;
 
         if (!remainingSets) {
-            playSound(frequencies.finish, undefined, 600);
+            playSound(frequencies.finish, undefined, 700);
             reset();
             return;
         }
 
-        currentDuration = settings.durations[+resting];
+        currentDuration = settings.durations[Number(resting)];
+
         playSound(frequencies[resting ? 'break' : 'set']);
         setSetDisplay(remainingSets);
         setMainDisplay(currentDuration);
-        setSubDisplay(settings.durations[+!resting]);
-        setMainLabel(labelTexts[+resting]);
-        setSubLabel(labelTexts[+!resting]);
+        setSubDisplay(settings.durations[Number(!resting)]);
+        setMainLabel(labelTexts[Number(resting)]);
+        setSubLabel(labelTexts[Number(!resting)]);
     } else if (currentDuration < 10) {
         playSound(
             frequencies.countdown,
-            0.25 + (10 - currentDuration) * 0.03
+            0.25 + (10 - currentDuration) * 1.3
         );
     }
 }

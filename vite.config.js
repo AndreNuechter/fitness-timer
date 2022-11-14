@@ -7,6 +7,7 @@ export default defineConfig({
     build: {
         emptyOutDir: true,
         outDir: './docs',
+        // the service worker cannot control folders above it
         assetsDir: './'
     },
     base: './',

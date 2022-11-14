@@ -17,7 +17,7 @@ export default (freq, volume = 0.25, duration = 200) => {
 
 export const frequencies = {
     countdown: 2500,
-    set: 220,
+    set: 1500,
     break: 1000,
-    finish: 1500
+    finish: 1750
 };
