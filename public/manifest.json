@@ -1,6 +1,7 @@
 {
     "name": "Fitness Timer",
     "short_name": "fitnessTimer",
+    "id": "/fitness-timer/",
     "start_url": "./",
     "scope": ".",
     "display": "standalone",
@@ -10,8 +11,7 @@
     "icons": [{
         "src": "./images/icons-192.png",
         "type": "image/png",
-        "sizes": "192x192",
-        "purpose": "any monochrome"
+        "sizes": "192x192"
     }, {
         "src": "./images/icons-512.png",
         "type": "image/png",
