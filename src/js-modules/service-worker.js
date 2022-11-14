@@ -5,7 +5,7 @@ self.addEventListener('activate', (event) => {
         (async () => {
             const keys = await self.caches.keys();
             return Promise.all(keys.map((key) => {
-                if (key.includes(appName) && key !== cacheName) {
+                if (key.includes(process.env.appName) && key !== cacheName) {
                     return self.caches.delete(key);
                 }
                 return true;
