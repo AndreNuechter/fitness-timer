@@ -1,9 +1,12 @@
 const ctx = new window.AudioContext();
 const masterGainNode = ctx.createGain();
+
 masterGainNode.connect(ctx.destination);
 
-// TODO use options object for optional params
-export default (freq, volume = 0.25, duration = 200) => {
+export default (
+    freq,
+    { volume = 0.25, duration = 200 } = { volume: 0.25, duration: 200 }
+) => {
     const osc = ctx.createOscillator();
 
     masterGainNode.gain.value = volume;
