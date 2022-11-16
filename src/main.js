@@ -40,13 +40,12 @@ window.addEventListener('DOMContentLoaded', () => {
 }, { once: true });
 app.addEventListener('focusin', ({ target }) => {
     if (target.tagName === 'INPUT') {
-        if (playing) togglePlaying();
         target.select();
     }
 });
 setDisplay.addEventListener('change', ({ target: { value } }) => {
     if (digitRe.test(value)) {
-        settings.numberOfSets = +value;
+        settings.numberOfSets = Number(value);
         reset();
     } else setSetDisplay(settings.numberOfSets);
 });
@@ -98,7 +97,7 @@ function togglePlaying() {
     setBtnIconId(btnIconIds[Number(playing)]);
 
     if (playing) {
-        setTimer();
+        timerInterval = setInterval(countDown, 1000);
         app.classList.add('timer-is-running');
     } else {
         clearTimer();
@@ -109,7 +108,7 @@ function togglePlaying() {
 function setDuration(currentRole, target) {
     const { value } = target;
     if (digitRe.test(value)) {
-        settings.setDuration(currentRole, +value);
+        settings.setDuration(currentRole, Number(value));
         setDurationOnePercent();
         reset();
     } else setValue(target, settings.durations[currentRole]);
@@ -118,10 +117,6 @@ function setDuration(currentRole, target) {
 function startWorkout() {
     playSound(frequencies.set, { duration: 600 });
     resetButton.classList.remove('hidden');
-}
-
-function setTimer() {
-    timerInterval = setInterval(countDown, 1000);
 }
 
 function countDown() {

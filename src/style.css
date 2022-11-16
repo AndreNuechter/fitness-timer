@@ -55,6 +55,7 @@ input:focus {
 
 .timer-is-running .input-field {
     pointer-events: none;
+    user-select: none;
 }
 
 #set-display,
