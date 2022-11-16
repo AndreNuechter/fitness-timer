@@ -53,6 +53,10 @@ input:focus {
     outline: none;
 }
 
+.timer-is-running .input-field {
+    pointer-events: none;
+}
+
 #set-display,
 #sub-display,
 .label-text {

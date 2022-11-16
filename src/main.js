@@ -1,4 +1,3 @@
-// TODO way to prevent screen touches (pointer-events: none for entire screen but the toggle)
 // TODO only screen-lock when a timer is running
 
 import './js-modules/wakelock.js';
@@ -85,6 +84,7 @@ function reset() {
     setSubLabel(labelTexts[1]);
     setBtnIconId(btnIconIds[0]);
     playButton.addEventListener('click', startWorkout, { once: true });
+    app.classList.remove('timer-is-running');
     resetButton.classList.add('hidden');
 }
 
@@ -99,8 +99,10 @@ function togglePlaying() {
 
     if (playing) {
         setTimer();
+        app.classList.add('timer-is-running');
     } else {
         clearTimer();
+        app.classList.remove('timer-is-running');
     }
 }
 
