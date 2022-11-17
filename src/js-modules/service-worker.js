@@ -2,7 +2,7 @@ const cacheName = `${process.env.appName}-v${process.env.appVersion}`;
 
 self.addEventListener('activate', (event) => {
     event.waitUntil(
-        (async () => {
+        (async() => {
             const keys = await self.caches.keys();
             return Promise.all(keys.map((key) => {
                 if (key.includes(process.env.appName) && key !== cacheName) {
@@ -16,7 +16,7 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
     event.respondWith(
-        (async () => {
+        (async() => {
             let response = await self.caches.match(event.request);
             if (response) return response;
             response = await fetch(event.request);
