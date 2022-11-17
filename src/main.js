@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', () => {
     reset();
 }, { once: true });
 app.addEventListener('focusin', ({ target }) => {
-    if (target.tagName === 'INPUT') {
+    if (!playing && target.tagName === 'INPUT') {
         target.select();
     }
 });
