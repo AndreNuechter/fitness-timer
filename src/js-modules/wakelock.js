@@ -1,12 +1,15 @@
-export default (async() => {
-    if (!('wakeLock' in navigator && 'request' in navigator.wakeLock)) return;
+export default (() => {
+    let wakeLockSentinel;
 
-    const getWakeLock = () => navigator.wakeLock.request('screen');
-    await getWakeLock();
+    async function request() {
+        wakeLockSentinel = await navigator.wakeLock?.request?.('screen');
+    }
 
-    document.addEventListener('visibilitychange', async() => {
-        if (document.visibilityState === 'visible') {
-            await getWakeLock();
-        }
-    });
+    async function release() {
+        if (!wakeLockSentinel) return;
+        await wakeLockSentinel.release();
+        wakeLockSentinel = undefined;
+    }
+
+    return { request, release };
 })();

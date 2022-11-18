@@ -1,7 +1,5 @@
-// TODO only screen-lock when a timer is running
-
-import './js-modules/wakelock.js';
 import './js-modules/service-worker-init.js';
+import wakeLock from './js-modules/wakelock.js';
 import playSound, { frequencies } from './js-modules/audio.js';
 import {
     app,
@@ -84,6 +82,7 @@ function reset() {
     setBtnIconId(btnIconIds[0]);
     playButton.addEventListener('click', startWorkout, { once: true });
     app.classList.remove('timer-is-running');
+    wakeLock.release();
     resetButton.classList.add('hidden');
 }
 
@@ -99,9 +98,11 @@ function togglePlaying() {
     if (playing) {
         timerInterval = setInterval(countDown, 1000);
         app.classList.add('timer-is-running');
+        wakeLock.request();
     } else {
         clearTimer();
         app.classList.remove('timer-is-running');
+        wakeLock.release();
     }
 }
 
