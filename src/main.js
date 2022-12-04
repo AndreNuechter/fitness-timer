@@ -24,11 +24,12 @@ import settings from './js-modules/settings.js';
 const labelTexts = ['Hussle', 'Chill'];
 const btnIconIds = ['play', 'pause'];
 const digitRe = /^\d+$/;
-let remainingSets;
 let playing;
 let resting;
-let currentDuration;
-let timerInterval;
+let remainingSets;
+let currentlyRemainingSeconds;
+let lastTick;
+let timerId;
 let setDurationVisualLength;
 let durationsOnePercent;
 
@@ -68,14 +69,15 @@ function init() {
 }
 
 function reset() {
+    lastTick = undefined;
     playing = false;
     resting = false;
     remainingSets = settings.numberOfSets;
-    [currentDuration] = settings.durations;
+    [currentlyRemainingSeconds] = settings.durations;
     clearTimer();
     setDurationVisualLength(100);
     setSetDisplay(remainingSets);
-    setMainDisplay(currentDuration);
+    setMainDisplay(currentlyRemainingSeconds);
     setMainLabel(labelTexts[0]);
     setSubDisplay(settings.durations[1]);
     setSubLabel(labelTexts[1]);
@@ -96,7 +98,7 @@ function togglePlaying() {
     setBtnIconId(btnIconIds[Number(playing)]);
 
     if (playing) {
-        timerInterval = setInterval(countDown, 1000);
+        timerId = requestAnimationFrame(animationLoop);
         app.classList.add('timer-is-running');
         wakeLock.request();
     } else {
@@ -120,15 +122,28 @@ function startWorkout() {
     resetButton.classList.remove('hidden');
 }
 
+function animationLoop(timestamp) {
+    if (lastTick === undefined) {
+        lastTick = timestamp;
+    }
+
+    if ((timestamp - lastTick) >= 1000) {
+        lastTick = timestamp;
+        countDown();
+    }
+
+    timerId = requestAnimationFrame(animationLoop);
+}
+
 function countDown() {
-    currentDuration -= 1;
+    currentlyRemainingSeconds -= 1;
 
-    const phaseIsOver = currentDuration <= 0;
+    const phaseIsOver = currentlyRemainingSeconds < 0;
 
-    setMainDisplay(currentDuration);
+    setMainDisplay(currentlyRemainingSeconds);
     setDurationVisualLength(phaseIsOver
         ? 100
-        : currentDuration / durationsOnePercent[Number(resting)]
+        : currentlyRemainingSeconds / durationsOnePercent[Number(resting)]
     );
 
     if (phaseIsOver) {
@@ -142,22 +157,22 @@ function countDown() {
             return;
         }
 
-        currentDuration = settings.durations[Number(resting)];
+        currentlyRemainingSeconds = settings.durations[Number(resting)];
 
         playSound(frequencies[resting ? 'break' : 'set']);
         setSetDisplay(remainingSets);
-        setMainDisplay(currentDuration);
+        setMainDisplay(currentlyRemainingSeconds);
         setSubDisplay(settings.durations[Number(!resting)]);
         setMainLabel(labelTexts[Number(resting)]);
         setSubLabel(labelTexts[Number(!resting)]);
-    } else if (currentDuration < 10) {
+    } else if (currentlyRemainingSeconds < 10) {
         playSound(
             frequencies.countdown,
-            { volume: 0.25 + (10 - currentDuration) * 1.3 }
+            { volume: 0.25 + (10 - currentlyRemainingSeconds) * 1.3 }
         );
     }
 }
 
 function clearTimer() {
-    clearInterval(timerInterval);
+    cancelAnimationFrame(timerId);
 }
