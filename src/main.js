@@ -127,12 +127,12 @@ function animationLoop(timestamp) {
         lastTick = timestamp;
     }
 
+    timerId = requestAnimationFrame(animationLoop);
+
     if ((timestamp - lastTick) >= 1000) {
         lastTick = timestamp;
         countDown();
     }
-
-    timerId = requestAnimationFrame(animationLoop);
 }
 
 function countDown() {
