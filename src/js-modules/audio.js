@@ -19,7 +19,7 @@ export default (
 };
 
 export const frequencies = {
-    countdown: 2500,
+    countdown: 2000,
     set: 1500,
     break: 1000,
     finish: 1750

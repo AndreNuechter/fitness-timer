@@ -167,8 +167,7 @@ function countDown() {
         setSubLabel(labelTexts[Number(!resting)]);
     } else if (currentlyRemainingSeconds < 10) {
         playSound(
-            frequencies.countdown,
-            { volume: 0.25 + (10 - currentlyRemainingSeconds) * 1.3 }
+            frequencies.countdown + 20 * (10 - currentlyRemainingSeconds)
         );
     }
 }
