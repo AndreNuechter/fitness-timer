@@ -8,9 +8,23 @@ export default defineConfig({
         emptyOutDir: true,
         outDir: './docs',
         // the service worker cannot control folders above it
-        assetsDir: './'
+        assetsDir: './',
+        rollupOptions: {
+            output: {
+                entryFileNames: '[name].js',
+                chunkFileNames: '[name].[ext]',
+                assetFileNames: '[name].[ext]'
+            }
+        }
     },
     base: './',
+    worker: {
+        rollupOptions: {
+            output: {
+                entryFileNames: '[name].js'
+            }
+        }
+    },
     server: {
         https: true,
     },
